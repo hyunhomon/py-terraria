@@ -20,5 +20,14 @@ class Block(ABC):
     
     @property
     @abstractmethod
+    def state(self) -> int:
+        return 0
+    
+    @abstractmethod
     def interact(self):
+        pass
+
+    @staticmethod
+    @abstractmethod
+    def create_by_id(id: int):
         pass

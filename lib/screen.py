@@ -1,8 +1,10 @@
 import random, json
 
 from lib.character import Character
+from lib.world import World
 from lib.ui.main_screen import MainScreen
 from lib.ui.char_screen import CharScreen
+from lib.ui.world_screen import WorldScreen
 
 class Screen:
     screen_state = "main"
@@ -22,10 +24,16 @@ class Screen:
             back_callback=lambda: self.set_screen("main"),
             create_char_callback=lambda: self.create_char()
         )
+        self.world_screen = WorldScreen(
+            display, random_bg,
+            back_callback=lambda: self.set_screen("main"),
+            create_world_callback=lambda: self.create_world()
+        )
 
-        self.screen_states = {
+        self.screen_states:dict = {
             "main": self.main_screen,
-            "char": self.char_screen
+            "char": self.char_screen,
+            "world": self.world_screen
         }
 
     def event(self, event):
@@ -41,4 +49,11 @@ class Screen:
         new_char = Character("Player1")
         f = open("saves/char1.json", "w")
         f.write(json.dumps(new_char.to_json(), indent=4))
+        f.close()
+        self.set_screen("world")
+
+    def create_world(self):
+        new_world = World("World1")
+        f = open("saves/world1.json", "w")
+        f.write(json.dumps(new_world.to_json(), indent=4))
         f.close()

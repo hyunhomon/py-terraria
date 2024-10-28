@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Visualization</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="worldCanvas"></canvas>
+    <script src="world1.json"></script>
+    <script>
+        const main = async () => {
+            // Python-generated world data
+            const world = {
+                width: 3000,
+                height: 1000,
+                tile_size: 16,
+                map: [] // Replace this with the generated map from your Python code
+            };
+    
+            // Simulated world data for demonstration (you can replace this with the actual generated data)
+            // For the purpose of this demo, I will generate a simple map
+            
+    
+            // Generate the world map
+            const res = await fetch('world1.json');
+            console.log(await res.text())
+            const json = await res.json();
+            world.map = json.map
+            console.log(world.map)
+    
+            // Set up canvas
+            const canvas = document.getElementById('worldCanvas');
+            canvas.width = world.width * world.tile_size;
+            canvas.height = world.height * world.tile_size;
+            const ctx = canvas.getContext('2d');
+    
+            // Define colors for different tile types
+            const colors = {
+                0: 'orange',  // Lava
+                1: 'green',   // Grass
+                3: 'gray',    // Stone
+                4: 'blue',    // Water
+                5: 'yellow',  // Sand
+                6: 'brown',   // Mud
+                7: 'lightcoral', // Copper
+                8: 'darkgray' // Iron
+            };
+    
+            // Draw the world
+            function drawWorld() {
+                for (let y = 0; y < world.height; y++) {
+                    for (let x = 0; x < world.width; x++) {
+                        const tile = world.map[y][x];
+                        ctx.fillStyle = colors[tile] || 'black'; // Default color for undefined tiles
+                        ctx.fillRect(x * world.tile_size, y * world.tile_size, world.tile_size, world.tile_size);
+                    }
+                }
+            }
+    
+            // Start drawing the world
+            drawWorld();
+        }
+    </script>
+</body>
+</html>
