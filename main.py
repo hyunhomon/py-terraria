@@ -2,17 +2,15 @@ import sys, time, pygame
 
 GAME_TITLE = "py-terraria"
 
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 500
-
 def main():
     pygame.init()
     pygame.display.set_caption(GAME_TITLE)
 
+    info = pygame.display.Info()
     clock = pygame.time.Clock()
-    display = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT], False)
-
+    display = pygame.display.set_mode((info.current_w, info.current_h), pygame.RESIZABLE)
     run = True
+
     while run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT: run = False
