@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from .tool import DamageType, Tool
+from ..tool import DamageType, Tool
 
 class Hammer(Tool):
     @property
@@ -44,12 +44,6 @@ class Hammer(Tool):
         self.attack()
 
     @staticmethod
+    @abstractmethod
     def create_from_json(json):
-        hammer = Hammer()
-        hammer.id = json["id"]
-        hammer.name = json["name"]
-        hammer.description = json["description"]
-        hammer.stack = json["stack"]
-        hammer.max_stack = json["max_stack"]
-        hammer.tags = json["tags"]
-        return hammer
+        pass

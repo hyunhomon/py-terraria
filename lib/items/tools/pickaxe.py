@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from .tool import DamageType, Tool
+from ..tool import DamageType, Tool
 
 class Pickaxe(Tool):
     @property
@@ -44,12 +44,6 @@ class Pickaxe(Tool):
         self.attack()
 
     @staticmethod
+    @abstractmethod
     def create_from_json(json):
-        pickaxe = Pickaxe()
-        pickaxe.id = json["id"]
-        pickaxe.name = json["name"]
-        pickaxe.description = json["description"]
-        pickaxe.stack = json["stack"]
-        pickaxe.max_stack = json["max_stack"]
-        pickaxe.tags = json["tags"]
-        return pickaxe
+        pass

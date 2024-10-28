@@ -63,5 +63,6 @@ class Tool(Item):
         self.attack()
 
     @staticmethod
+    @abstractmethod
     def create_from_json(json):
-        return Tool() # TODO: implement
+        pass
