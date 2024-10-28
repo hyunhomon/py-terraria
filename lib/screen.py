@@ -5,6 +5,7 @@ from lib.world import World
 from lib.ui.main_screen import MainScreen
 from lib.ui.char_screen import CharScreen
 from lib.ui.world_screen import WorldScreen
+from lib.ui.game_screen import GameScreen
 
 class Screen:
     screen_state = "main"
@@ -28,13 +29,16 @@ class Screen:
         self.world_screen = WorldScreen(
             display, random_bg,
             back_callback=lambda: self.set_screen("char"),
-            create_world_callback=lambda: self.create_world()
+            create_world_callback=lambda: self.create_world(),
+            play_callback=lambda: self.set_screen("game")
         )
+        self.game_screen = GameScreen(display)
 
         self.screen_states:dict = {
             "main": self.main_screen,
             "char": self.char_screen,
-            "world": self.world_screen
+            "world": self.world_screen,
+            "game": self.game_screen
         }
 
     def event(self, event):

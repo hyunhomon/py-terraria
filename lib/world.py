@@ -1,4 +1,16 @@
-import random, json, math
+import random, json, math, pygame
+
+color_map = {
+    0: (0, 0, 0),  # 용암
+    1: (139, 69, 19),  # 흙
+    2: (0, 255, 0),  # 나무
+    3: (128, 128, 128),  # 돌
+    4: (0, 0, 255),  # 물
+    5: (255, 255, 0),  # 모래
+    6: (255, 0, 0),  # 불
+    7: (184, 115, 51),  # 구리
+    8: (255, 255, 255)  # 철
+}
 
 class World:
     def __init__(self, name:str, auto_create:bool=True):
@@ -6,7 +18,7 @@ class World:
         self.map = []
         self.width = 3000
         self.height = 1000
-        self.tile_size = 16
+        self.tile_size = 1
         if auto_create:
             self.create()
 
@@ -115,3 +127,6 @@ class World:
                 st += ' ' if tile == 0 else '#' if tile == 1 else '~' if tile == 4 else '^' if tile == 3 else 'O' if tile == 7 else 'I' if tile == 8 else ' '
             st += '\n'
         return st
+
+    def draw(self, display:pygame.Surface, camera:dict):
+        pass

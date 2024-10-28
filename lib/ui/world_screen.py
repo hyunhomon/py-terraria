@@ -6,7 +6,8 @@ from lib.world import World
 class WorldScreen:
     def __init__(self, display: pygame.Surface, random_bg: int,
                  back_callback: callable,
-                 create_world_callback: callable
+                 create_world_callback: callable,
+                 play_callback: callable
                 ):
         self.display = display
         self.font = pygame.font.Font("fonts/ANDYB.TTF", 48)
@@ -14,6 +15,7 @@ class WorldScreen:
         self.logo = pygame.image.load("assets/Logo.png")
         self.back_callback = back_callback
         self.create_world_callback = create_world_callback
+        self.play_callback = play_callback
 
         # 박스 생성
         self.frame = Box((self.display.get_width() // 2, self.display.get_height() // 2 + 80), (600, 700), bg_color=(80, 80, 200, 200), border_radius=10, padding=(100, 10))
@@ -41,7 +43,7 @@ class WorldScreen:
                 self.create_world_callback()
                 self.call_world()
             elif self.play_button.is_clicked(event.pos):
-                print("Play button clicked")
+                self.play_callback()
 
     def call_world(self):
         f = open("saves/world1.json", "r")
