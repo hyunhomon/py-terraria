@@ -17,3 +17,8 @@ class Block(ABC):
     @abstractmethod
     def drop_item(self) -> Item:
         return None
+    
+    @property
+    @abstractmethod
+    def interact(self):
+        pass

@@ -1,0 +1,12 @@
+{
+    "name": "Player1",
+    "max_hp": 100,
+    "max_mp": 20,
+    "hp": 100,
+    "mp": 20,
+    "attack": 1,
+    "defense": 0,
+    "speed": 1,
+    "jump": 3,
+    "inventory": []
+}

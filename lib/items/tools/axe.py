@@ -1,27 +1,11 @@
 from abc import abstractmethod
-from typing import List, Literal
-from ..item import Item, Tag
+from .tool import DamageType, Tool
 
-DamageType = Literal["melee", "ranged", "magic", "summon", "throwing"]
-
-class Tool(Item):
+class Axe(Tool):
     @property
-    def stack(self) -> int:
-        return 1
-
-    @property
-    def max_stack(self) -> int:
-        return 1
-
-    @property
-    def tags(self) -> List[Tag]:
-        return ["tool"]
-    
-    @property
-    @abstractmethod
     def damage_type(self) -> DamageType:
         return "melee"
-    
+
     @property
     @abstractmethod
     def damage(self) -> int:
@@ -41,17 +25,14 @@ class Tool(Item):
     @abstractmethod
     def knockback(self) -> int:
         return 1
-
+    
+    @property
     @abstractmethod
-    def mine(self):
-        pass
+    def axe_power(self) -> float:
+        return 0.4
 
     @abstractmethod
     def chop(self):
-        pass
-
-    @abstractmethod
-    def hammer(self):
         pass
 
     @abstractmethod
@@ -64,4 +45,11 @@ class Tool(Item):
 
     @staticmethod
     def create_from_json(json):
-        return Tool() # TODO: implement
+        axe = Axe()
+        axe.id = json["id"]
+        axe.name = json["name"]
+        axe.description = json["description"]
+        axe.stack = json["stack"]
+        axe.max_stack = json["max_stack"]
+        axe.tags = json["tags"]
+        return axe

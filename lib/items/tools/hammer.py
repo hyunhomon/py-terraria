@@ -1,7 +1,7 @@
 from abc import abstractmethod
 from .tool import DamageType, Tool
 
-class Pickaxe(Tool):
+class Hammer(Tool):
     @property
     def damage_type(self) -> DamageType:
         return "melee"
@@ -28,11 +28,11 @@ class Pickaxe(Tool):
     
     @property
     @abstractmethod
-    def pickaxe_power(self) -> float:
+    def hammer_power(self) -> float:
         return 0.4
 
     @abstractmethod
-    def mine(self):
+    def hammer(self):
         pass
 
     @abstractmethod
@@ -42,3 +42,14 @@ class Pickaxe(Tool):
     @abstractmethod
     def use(self):
         self.attack()
+
+    @staticmethod
+    def create_from_json(json):
+        hammer = Hammer()
+        hammer.id = json["id"]
+        hammer.name = json["name"]
+        hammer.description = json["description"]
+        hammer.stack = json["stack"]
+        hammer.max_stack = json["max_stack"]
+        hammer.tags = json["tags"]
+        return hammer
