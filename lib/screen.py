@@ -22,11 +22,12 @@ class Screen:
         self.char_screen = CharScreen(
             display, random_bg,
             back_callback=lambda: self.set_screen("main"),
-            create_char_callback=lambda: self.create_char()
+            create_char_callback=lambda: self.create_char(),
+            goto_world_callback=lambda: self.set_screen("world")
         )
         self.world_screen = WorldScreen(
             display, random_bg,
-            back_callback=lambda: self.set_screen("main"),
+            back_callback=lambda: self.set_screen("char"),
             create_world_callback=lambda: self.create_world()
         )
 
@@ -50,7 +51,6 @@ class Screen:
         f = open("saves/char1.json", "w")
         f.write(json.dumps(new_char.to_json(), indent=4))
         f.close()
-        self.set_screen("world")
 
     def create_world(self):
         new_world = World("World1")

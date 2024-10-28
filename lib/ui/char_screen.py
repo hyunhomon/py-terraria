@@ -6,7 +6,8 @@ from lib.character import Character
 class CharScreen:
     def __init__(self, display: pygame.Surface, random_bg: int,
                  back_callback: callable,
-                 create_char_callback: callable
+                 create_char_callback: callable,
+                 goto_world_callback: callable
                 ):
         self.display = display
         self.font = pygame.font.Font("fonts/ANDYB.TTF", 48)
@@ -14,6 +15,7 @@ class CharScreen:
         self.logo = pygame.image.load("assets/Logo.png")
         self.back_callback = back_callback
         self.create_char_callback = create_char_callback
+        self.goto_world_callback = goto_world_callback
 
         # 박스 생성
         self.frame = Box((self.display.get_width() // 2, self.display.get_height() // 2 + 80), (600, 700), bg_color=(80, 80, 200, 200), border_radius=10, padding=(100, 10))
@@ -41,7 +43,7 @@ class CharScreen:
                 self.create_char_callback()
                 self.call_char()
             elif self.play_button.is_clicked(event.pos):
-                print("Play button clicked")
+                self.goto_world_callback()
 
     def call_char(self):
         f = open("saves/char1.json", "r")

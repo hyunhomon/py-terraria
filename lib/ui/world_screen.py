@@ -53,7 +53,7 @@ class WorldScreen:
             json_data = json.loads(r)
             f.close()
             if json_data:
-                self.char = World.create_from_json(json_data)
+                self.world = World.create_from_json(json_data)
 
     def draw(self):
         self.display.fill((0, 0, 0))
